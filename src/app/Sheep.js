@@ -3,15 +3,33 @@ export default class Sheep {
     this.ctx = ctx;
     this.position = position || [0, 0];
     this.dimension = [36, 36];
-    this.direction = [1, 0];
+    this.g = 1; // NOTE: Gravity.
   }
 
   update() {
-    let newX = this.position[0] + this.dimension[0] + this.direction[0];
-    if (newX > this.ctx.canvas.width || this.position[0] < 1) {
-      this.direction[0] = -this.direction[0];
+    if (this.canFall()) {
+      this.fall();
     }
-    this.position[0] = this.position[0] + this.direction[0];
+  }
+
+  /**
+   * Simple collision check.
+   * @return {boolean} whether can the sheep fall.
+   */
+  canFall() {
+    return this.position[1] + this.dimension[1] + 1 < this.ctx.canvas.height;
+  }
+
+  /**
+   * Fall down.
+   */
+  fall() {
+    this.position[1] += this.g;
+  }
+
+  // TODO: When calling this method, the sheep will `jump`.
+  jump() {
+    
   }
 
   draw() {

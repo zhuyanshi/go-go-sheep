@@ -1,0 +1,30 @@
+parserOptions:
+  ecmaVersion: 6
+  sourceType: module
+
+globals:
+  DEV: true # It's an environment variable to control the behavior of build and dev.
+
+rules:
+  eqeqeq:
+    - 1
+    - smart
+  indent:
+    - 1
+    - 2
+  quotes:
+    - 2
+    - single
+  linebreak-style:
+    - 2
+    - unix
+  semi:
+    - 2
+    - always
+
+env:
+  es6: true
+  commonjs: true
+  browser: true
+
+extends: eslint:recommended

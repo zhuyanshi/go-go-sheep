@@ -4,6 +4,7 @@ export default class Sheep {
     this.position = position || [0, 0];
     this.dimension = [36, 36];
     this.g = 1; // NOTE: Gravity.
+    this.v = [0, 0]; // NOTE: Velocity.
   }
 
   update() {
@@ -24,12 +25,20 @@ export default class Sheep {
    * Fall down.
    */
   fall() {
-    this.position[1] += this.g;
+    let _position = this.position[1] + this.v[1] + this.g/2;
+    let horizon = this.ctx.canvas.height - this.dimension[1] - 1;
+    if (_position >= horizon) {
+      _position = horizon;
+      this.v[1] = 0;
+    } else {
+      this.v[1] += this.g;
+    }
+    this.position[1] = _position;
   }
 
   // TODO: When calling this method, the sheep will `jump`.
   jump() {
-    
+
   }
 
   draw() {

@@ -8,7 +8,7 @@ export default class Game {
   }
 
   run() {
-    this.init();
+    //this.init();
     requestAnimationFrame(function step() {
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
       this.ctx.save();
@@ -23,15 +23,14 @@ export default class Game {
       requestAnimationFrame(step.bind(this));
     }.bind(this));
   }
-  handleEvent(){
-    console.log('jump'); // 'Something Good', as this is the Something object
-    if (event.type ==='keydown'&&event.key ===' ' ) {
-      if(this.drawables[0].canJump()){
-        this.drawables[0].jump();
-      }
-    }
-  };
-  init() {
-    window.addEventListener('keydown',this,false);
-  };
+  // handleEvent(){
+  //   if (event.type ==='keydown'&&event.key ===' ' ) {
+  //     if(this.drawables[0].canJump()){
+  //       this.drawables[0].jump();
+  //     }
+  //   }
+  // };
+  // init() {
+  //   window.addEventListener('keydown',this,false);
+  // };
 }

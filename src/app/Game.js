@@ -26,10 +26,32 @@ export default class Game {
 
   keyBinding() {
     window.addEventListener('keydown', e => {
-      this.drawables[0].action(e);
+      switch (e.code) {
+        case "Space":
+          this.drawables[0].jump()
+          break;
+        case 'KeyD':
+          this.drawables[0].moveRight(e.repeat);
+          break;
+        case 'KeyA':
+          this.drawables[0].moveLeft(e.repeat);
+          break;
+        default:
+      }
     });
     window.addEventListener('keyup', e => {
-      this.drawables[0].action(e);
+      switch (e.code) {
+        case "Space":
+          this.drawables[0].endJump()
+          break;
+        case 'KeyD':
+          this.drawables[0].endMoveRight();
+          break;
+        case 'KeyA':
+          this.drawables[0].endMoveLeft();
+          break;
+        default:
+      }
     });
   }
 }

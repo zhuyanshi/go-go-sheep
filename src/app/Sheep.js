@@ -63,44 +63,44 @@ export default class Sheep {
     this.VerticalMove();
     this.borderDetect();
   }
-
-
-  /*
-   *行动
-   */
-  action(e) {
-    console.log(e.type);
-    console.log(e.code);
-    console.log(e.key);
-    console.log(e.repeat);
-    if (e.type == "keydown") {
-      switch (e.code) {
-        case "Space":
-          this.jump()
-          break;
-        case 'KeyD':
-          this.moveRight(e.repeat);
-          break;
-        case 'KeyA':
-          this.moveLeft(e.repeat);
-          break;
-        default:
-      }
-    } else if (e.type == 'keyup') {
-      switch (e.code) {
-        case "Space":
-          this.endJump()
-          break;
-        case 'KeyD':
-          this.endMoveRight();
-          break;
-        case 'KeyA':
-          this.endMoveLeft();
-          break;
-        default:
-      }
-    }
-  }
+  //
+  //
+  // /*
+  //  *行动
+  //  */
+  // action(e) {
+  //   console.log(e.type);
+  //   console.log(e.code);
+  //   console.log(e.key);
+  //   console.log(e.repeat);
+  //   if (e.type == "keydown") {
+  //     switch (e.code) {
+  //       case "Space":
+  //         this.jump()
+  //         break;
+  //       case 'KeyD':
+  //         this.moveRight(e.repeat);
+  //         break;
+  //       case 'KeyA':
+  //         this.moveLeft(e.repeat);
+  //         break;
+  //       default:
+  //     }
+  //   } else if (e.type == 'keyup') {
+  //     switch (e.code) {
+  //       case "Space":
+  //         this.endJump()
+  //         break;
+  //       case 'KeyD':
+  //         this.endMoveRight();
+  //         break;
+  //       case 'KeyA':
+  //         this.endMoveLeft();
+  //         break;
+  //       default:
+  //     }
+  //   }
+  // }
 
   /**
    * 跳跃

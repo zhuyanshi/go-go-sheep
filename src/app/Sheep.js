@@ -20,13 +20,13 @@ export default class Sheep {
    */
   borderDetect() {
     if (this.position[0] < 0) {
-      this.position[0] = 1
+      this.position[0] = 1;
     } else if (this.position[0] > this.ctx.canvas.width - this.dimension[1]) {
-      this.position[0] = this.ctx.canvas.width - this.dimension[1] - 1
+      this.position[0] = this.ctx.canvas.width - this.dimension[1] - 1;
     }
 
     if (this.position[1] > this.ctx.canvas.height - this.dimension[1]) {
-      this.position[1] = this.ctx.canvas.height - this.dimension[1] - 1
+      this.position[1] = this.ctx.canvas.height - this.dimension[1] - 1;
     }
   }
 
@@ -42,8 +42,8 @@ export default class Sheep {
    */
   horizontalMove() {
     this.position[0] = this.position[0] + this.velocity[0] + this.acceleration[0] / 2;
-    this.velocity[0] = this.velocity[0] + this.acceleration[0]
-    return this.position[0]
+    this.velocity[0] = this.velocity[0] + this.acceleration[0];
+    return this.position[0];
   }
 
   /**
@@ -51,8 +51,8 @@ export default class Sheep {
    */
   VerticalMove() {
     this.position[1] = this.position[1] + this.velocity[1] + this.acceleration[1] / 2;
-    this.velocity[1] = this.velocity[1] + this.acceleration[1]
-    return this.position[1]
+    this.velocity[1] = this.velocity[1] + this.acceleration[1];
+    return this.position[1];
   }
 
   /**

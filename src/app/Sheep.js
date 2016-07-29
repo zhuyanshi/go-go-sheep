@@ -5,16 +5,16 @@ export default class Sheep {
     this.dimension = [128, 128];
     this.velocity = [0, 0]; //速度
     this.acceleration = [0, 1]; // 加速度
-    this.ontheair = false;
-    this.headright = false;
+    this.onTheAir = false;
+    this.headRight = false;
     this.jumpV = 14; //跳跃初始速度
     this.initialV = 7; //横向初始速度
-    this.jumpA = [1, 0.3]; //默认重力加速度,跳跃按下时重力加速度
+    this.jumpA = [1, 0.4]; //默认重力加速度,跳跃按下时重力加速度
     this.myImage = new Image(1024, 256);
     this.myImage.src = require('assets/images/sheep.png');
-    this.headto = 1; //1为向右,-1为向左
+    this.headTo = 1; //1为向右,-1为向左
     this.sheepStatus = 3; //0为向跳跃,1为左腿,2为右腿,3为直立
-    this.framechange = 10; //0为向跳跃,1为左腿,2为右腿,3为直立
+    this.frameChange = 2; //0为向跳跃,1为左腿,2为右腿,3为直立
   }
 
   update() {
@@ -93,7 +93,7 @@ export default class Sheep {
   moveRight(repeat) {
     if (repeat === false) {
       this.velocity[0] = this.velocity[0] + this.initialV;
-      this.headright = true;
+      this.headRight = true;
     }
   }
 
@@ -103,7 +103,7 @@ export default class Sheep {
   moveLeft(repeat) {
     if (repeat === false) {
       this.velocity[0] = this.velocity[0] - this.initialV;
-      this.headright = false;
+      this.headRight = false;
     }
   }
 
@@ -128,22 +128,22 @@ export default class Sheep {
       if (this.velocity[0] === 0) {
         this.sheepStatus = '3';
 
-        this.framechange = 0;
+        this.frameChange = 0;
       } else {
-        if (this.framechange === 0) {
+        if (this.frameChange === 0) {
           if (this.sheepStatus === '1') {
             this.sheepStatus = '2';
           } else {
             this.sheepStatus = '1';
           }
-          this.framechange = 30;
+          this.frameChange = 15;
         }
-        this.framechange = this.framechange - 1;
+        this.frameChange = this.frameChange - 1;
       }
     } else {
       this.sheepStatus = '0';
     }
-    this.ctx.drawImage(this.myImage, 0 + 256 * this.sheepStatus*this.headto, 0, 256, 256, this.position[0], this.position[1], this.dimension[0], this.dimension[1]);
+    this.ctx.drawImage(this.myImage, 0 + 256 * this.sheepStatus*this.headTo, 0, 256, 256, this.position[0], this.position[1], this.dimension[0], this.dimension[1]);
     this.ctx.restore();
   }
 }

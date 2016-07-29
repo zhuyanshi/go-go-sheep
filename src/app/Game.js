@@ -27,8 +27,8 @@ export default class Game {
   keyBinding() {
     window.addEventListener('keydown', e => {
       switch (e.code) {
-        case "Space":
-          this.drawables[0].jump()
+        case 'Space':
+          this.drawables[0].jump();
           break;
         case 'KeyD':
           this.drawables[0].moveRight(e.repeat);
@@ -41,8 +41,8 @@ export default class Game {
     });
     window.addEventListener('keyup', e => {
       switch (e.code) {
-        case "Space":
-          this.drawables[0].endJump()
+        case 'Space':
+          this.drawables[0].endJump();
           break;
         case 'KeyD':
           this.drawables[0].endMoveRight();

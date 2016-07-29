@@ -2,13 +2,19 @@ export default class Sheep {
   constructor(ctx, position) {
     this.ctx = ctx;
     this.position = position || [0, 0];
-    this.dimension = [36, 36];
+    this.dimension = [128, 128];
     this.velocity = [0, 0]; //速度
     this.acceleration = [0, 1]; // 加速度
-
+    this.onTheAir = false;
+    this.headRight = false;
     this.jumpV = 14; //跳跃初始速度
     this.initialV = 7; //横向初始速度
-    this.jumpA = [1, 0.3]; //默认重力加速度,跳跃按下时重力加速度
+    this.jumpA = [1, 0.4]; //默认重力加速度,跳跃按下时重力加速度
+    this.myImage = new Image(1024, 256);
+    this.myImage.src = require('assets/images/sheep.png');
+    this.headTo = 1; //1为向右,-1为向左
+    this.sheepStatus = 3; //0为向跳跃,1为左腿,2为右腿,3为直立
+    this.frameChange = 2; //0为向跳跃,1为左腿,2为右腿,3为直立
   }
 
   update() {
@@ -63,44 +69,6 @@ export default class Sheep {
     this.VerticalMove();
     this.borderDetect();
   }
-  //
-  //
-  // /*
-  //  *行动
-  //  */
-  // action(e) {
-  //   console.log(e.type);
-  //   console.log(e.code);
-  //   console.log(e.key);
-  //   console.log(e.repeat);
-  //   if (e.type == "keydown") {
-  //     switch (e.code) {
-  //       case "Space":
-  //         this.jump()
-  //         break;
-  //       case 'KeyD':
-  //         this.moveRight(e.repeat);
-  //         break;
-  //       case 'KeyA':
-  //         this.moveLeft(e.repeat);
-  //         break;
-  //       default:
-  //     }
-  //   } else if (e.type == 'keyup') {
-  //     switch (e.code) {
-  //       case "Space":
-  //         this.endJump()
-  //         break;
-  //       case 'KeyD':
-  //         this.endMoveRight();
-  //         break;
-  //       case 'KeyA':
-  //         this.endMoveLeft();
-  //         break;
-  //       default:
-  //     }
-  //   }
-  // }
 
   /**
    * 跳跃
@@ -125,6 +93,7 @@ export default class Sheep {
   moveRight(repeat) {
     if (repeat === false) {
       this.velocity[0] = this.velocity[0] + this.initialV;
+      this.headRight = true;
     }
   }
 
@@ -134,6 +103,7 @@ export default class Sheep {
   moveLeft(repeat) {
     if (repeat === false) {
       this.velocity[0] = this.velocity[0] - this.initialV;
+      this.headRight = false;
     }
   }
 
@@ -154,8 +124,26 @@ export default class Sheep {
 
   draw() {
     this.ctx.save();
-    this.ctx.strokeStyle = 'red';
-    this.ctx.strokeRect(this.position[0], this.position[1], this.dimension[0], this.dimension[1]);
+    if (this.isOnTheGround()) {
+      if (this.velocity[0] === 0) {
+        this.sheepStatus = '3';
+
+        this.frameChange = 0;
+      } else {
+        if (this.frameChange === 0) {
+          if (this.sheepStatus === '1') {
+            this.sheepStatus = '2';
+          } else {
+            this.sheepStatus = '1';
+          }
+          this.frameChange = 15;
+        }
+        this.frameChange = this.frameChange - 1;
+      }
+    } else {
+      this.sheepStatus = '0';
+    }
+    this.ctx.drawImage(this.myImage, 0 + 256 * this.sheepStatus*this.headTo, 0, 256, 256, this.position[0], this.position[1], this.dimension[0], this.dimension[1]);
     this.ctx.restore();
   }
 }
